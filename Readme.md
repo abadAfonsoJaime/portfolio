@@ -80,12 +80,15 @@ The portfolio uses a consistent dark theme with blue accents:
 // next.config.js
 const nextConfig = {
   output: 'export',           // Generate static HTML/CSS/JS
+  basePath: '/portfolio',     // Required for GitHub Pages subdirectory
   trailingSlash: true,        // Add trailing slashes to URLs
   images: {
     unoptimized: true,        // Required for static export
   },
 }
 ```
+
+**Important:** The `basePath: '/portfolio'` is required when deploying to GitHub Pages at `username.github.io/portfolio/`. Remove this line if deploying to a custom domain or root domain.
 
 ## Build & Deploy
 
