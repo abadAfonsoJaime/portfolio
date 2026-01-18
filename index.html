@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Portfolio</title>
+    <link rel="stylesheet" href="myStyleSheet.css">
+    <!-- Google Fonts -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> -->
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"   >
+</head>
+<body>
+    <div class="HeroHeader">
+        <div class="Wrapper">
+            <header>
+                <div class="Logo">
+                    <i class="fa-solid fa-a"></i>
+                    <div class="LogoText">My Portfolio</div>
+                </div>
+                <nav>
+                    <div class="ToogleButton">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <ul class="NavigationLinks">
+                        <li><a href="#Home">Home</a></li>
+                        <li><a href="#Projects">Projects</a></li>
+                        <li><a href="#Resume">Resume</a></li>
+                        <li><a href="#Blog">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>       
+            </header>
+            <div class="Container">
+                <div class="HeroEpic">
+                    <img src="images/paella_20190420.jpg" alt="Hero Image">
+                </div>
+
+                <div class="HeroText">
+                    <h5>Hi! I am <span class="Input">: </span></h5>
+                    <h1>Jaime Abad</h1>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat ducimus saepe adipisci aspernatur dolore omnis cupiditate numquam asperiores amet, maiores commodi exercitationem iusto culpa laboriosam, ad totam, aperiam suscipit accusantium.
+                    </p>
+
+                    <div class="ButtonGroup">
+                        <a href="#" class="Button Active">Download CV</a>
+                        <a href="#" class="Button">Contact</a>   
+                    </div>
+
+                    <div class="SocialIcons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+     <!-- 
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Welcome to my portfolio! I am a web developer with a passion for creating beautiful and functional websites.</p>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project">
+                <h3>Project One</h3>
+                <p>Description of project one.</p>
+            </div>
+            <div class="project">
+                <h3>Project Two</h3>
+                <p>Description of project two.</p>  
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Email: example@example.com</p>
+        </section>
+        -->
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.10/typed.min.js"></script>
+    <!-- JavaScript for Toggle Button -->
+    <script>
+        const toogleButton = document.querySelector('.ToogleButton');
+        const navigationLinks = document.querySelector('.NavigationLinks');
+
+        toogleButton.addEventListener('click', () => {
+            navigationLinks.classList.toggle('open');
+        });
+
+        var typed = new Typed('.Input', {
+            strings: [': ','Engineer', 'Tech Enthusiast', 'Ready to work!'],
+            typeSpeed: 70,
+            backSpeed: 50,
+            loop: true
+        });
+    </script>
+    
+</body>
+</html>

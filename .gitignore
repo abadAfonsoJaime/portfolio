@@ -1,0 +1,17 @@
+# Next.js node_modules
+node_modules/
+.next/
+out/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Development
+.env*.local
+.vercel
+
+# Old files (backup before migration)
+index.html.backup
+myStyleSheet.css.backup
+images/

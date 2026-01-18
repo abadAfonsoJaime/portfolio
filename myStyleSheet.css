@@ -1,0 +1,308 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', 'Roboto', sans-serif;
+    /*font-family: poppins,sans-serif;*/
+}
+body {
+    overflow-x: hidden;
+}
+.HeroHeader {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    background: #222;
+    /*
+    padding: 0 20px;   
+    background: url('images/hero-bg.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    */
+}
+
+.Wrapper {
+    max-width: 1280px;
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    padding: 40px 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.Logo {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Logo i {
+    height: 45px;
+    width: 45px;
+    background-color: #007ced;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.5rem;
+    padding: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.Logo .LogoText {
+    font-size: 24px;
+    font-weight: 500;
+    color: #fff;
+    /*cursor: pointer;*/
+}
+
+nav .ToogleButton {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 45px;
+    right: 3%;
+    z-index: 5;
+    cursor: pointer;
+}
+
+nav .ToogleButton span {
+    display: block;
+    background-color: #007ced;
+    margin: 5px 0;
+    width: 100%;
+    height: 3px;
+    transition: 0.3s;
+    transition-property: transform, opacity;
+}
+
+nav .NavigationLinks {
+    list-style-type: none;
+}
+nav .NavigationLinks li {
+    display: inline-block;
+}
+nav .NavigationLinks li a {
+    color: #e5e5e5;
+    text-decoration: none;
+    margin-right: 2.5rem;
+}
+
+.Container {
+    display : flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 4rem;
+}
+
+.Container .HeroEpic {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 15 solid #444;
+    box-shadow: 5px 7px 25px rgba(0,0,0,0.5);
+}
+
+.HeroEpic img {
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+    /*object-fit: cover;*/
+}
+.HeroEpic img:hover {
+    transform: scale(1.2);
+}
+
+.HeroText {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.HeroText h1 {
+    color: #007ced;;
+    font-size: 3rem;
+}
+
+.HeroText h5 {
+    color: #e5e5e5;
+    font-size: 14px;
+}
+
+.HeroText h5 span{
+    color: #007ced;
+    font-size: 16px;/*1.2rem;
+    display: flex;
+    flex-direction: column;*/
+}
+
+.HeroText p {
+    color: #e5e5e5;
+}
+.SocialIcons a {
+    color: e#e5e5e5;
+}
+.ButtonGroup {
+    margin: 45px 0;
+}
+
+.ButtonGroup .Button {
+    border-color: #e5e5e5;
+    color: #fff;
+    background-color: #333;
+    text-decoration: none;
+    padding: 12px 25px;
+    margin: 5px 0px;
+    margin-right: 7px;
+    border-radius: 30px;
+    /*font-size: 16px;
+    font-weight: 500;*/
+    border: 2px solid #e5e5e5;
+    box-shadow: 0 10px 10px -8px rgba(0 0 0 / 78%);
+    transition: 0.3s;
+}
+
+.Button.Active {
+    border-color: #007ced;
+}
+
+.ButtonGroup .Button:hover {
+    background-color: #007ced;
+    border-color: #007ced;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 14px -10px rgba(0 0 0 / 78%);
+}
+
+.SocialIcons .fab {
+    color:#e5e5e5;
+    margin-right: 15px;
+    font-size: 20px;
+}
+
+.HeroText .SocialIcons i {
+    color: e#e5e5e5;
+    font-size: 18px;
+    margin-right: 10px;
+    transition: 0.5s;
+}
+
+.HeroText .SocialIcons i:hover {
+    color: #007ced;
+    /*transform: translateY(-5px);*/
+    transform: rotate(360deg)
+}
+/* Responsive Desgin & display navbar for mobile devices */
+@media (max-width:930px)
+{
+    nav .ToogleButton {
+        display: initial;
+    }
+    /* for toogle button */
+    .click {
+        top: 45px;
+    }
+
+    .clic span {
+        position: absolute;
+        margin-top: 12px;
+    }
+    
+    .clic span:first-child {
+        transform: rotate(-40deg);
+    }
+    /*
+    .clic span:nth-child(1) {
+        transform: rotate(45deg);
+    }
+    */
+    .clic span:nth-child(2) {
+        opacity: 0;
+        margin: 0;
+    }
+
+    .clic span:last-child {
+        transform: rotate(45deg);
+        top: 0;
+    }
+
+    nav .NavigationLinks {
+        position: absolute;
+        top: 110px;
+        right: -100%;
+        bottom: 0px;
+        width: 60%;
+        height: 100vh; /*height: calc(100vh - 110px);*/
+        background-color: #222;
+        z-index: 3;
+        box-shadow: 5px 13px 30px rgba(0,0,0,0.1);
+        transition: 0.5s;
+        padding: 25px 0px;
+    }
+
+    nav .NavigationLinks li {
+        display: block;
+    }
+    nav .NavigationLinks li a {
+        display: block;
+        margin-bottom: 15px;
+        /*margin: 1.5rem 0;*/
+        text-align: center;
+    }
+    nav .NavigationLinks.open {
+        right: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .Container {
+        flex-direction: column;
+        padding-top: 2rem;
+    }
+    .Container .HeroText {
+        padding: 40px 0px;
+        /*margin-bottom: 30px;*/
+    }
+} 
+
+/* Alternative Responsive Design
+@media (max-width: 768px) {
+    .Container .HeroEpic {
+        margin-bottom: 30px;
+    }
+    nav .ToogleButton {
+        display: block;
+    }
+    nav .NavigationLinks {
+        position: fixed;
+        right: 0;
+        height: 100vh;
+        top: 0;
+        background-color: #222;
+        flex-direction: column;
+        width: 200px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in;
+        padding-top: 100px;
+    }
+    nav .NavigationLinks li {
+        display: block;
+        margin: 1.5rem 0;
+        text-align: center;
+    }
+    nav .NavigationLinks.active {
+        transform: translateX(0);
+    }
+}
+*/
