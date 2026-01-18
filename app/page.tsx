@@ -116,7 +116,7 @@ export default function Home() {
         <div className="container">
           <div className="hero-image">
             <img 
-              src="/paella_20190420.jpg" 
+              src="/portfolio/paella_20190420.jpg" 
               alt="Jaime Abad" 
               className="hero-image__img"
             />
@@ -136,14 +136,14 @@ export default function Home() {
 
             <div className="button-group">
               <a 
-                href="/JaimeAbad_CV_2026.pdf" 
+                href="/portfolio/JaimeAbad_CV_2026.pdf" 
                 download="JaimeAbad_CV_2026.pdf"
                 className="button-group__btn button-group__btn--active"
               >
                 <i className="fas fa-file-pdf"></i> CV (PDF)
               </a>
               <a 
-                href="/JaimeAbad_CV_2026.docx" 
+                href="/portfolio/JaimeAbad_CV_2026.docx" 
                 download="JaimeAbad_CV_2026.docx"
                 className="button-group__btn"
               >
@@ -235,7 +235,7 @@ export default function Home() {
           <div className="projects__grid">
             <div className="project-card">
               <div className="project-card__image">
-                <img src="/paella_20190420.jpg" alt="Project 1" className="project-card__img" />
+                <img src="/portfolio/paella_20190420.jpg" alt="Project 1" className="project-card__img" />
                 <div className="project-card__overlay">
                   <a href="#" className="project-card__link">
                     <i className="fas fa-external-link-alt"></i>
@@ -263,7 +263,7 @@ export default function Home() {
 
             <div className="project-card">
               <div className="project-card__image">
-                <img src="/paella_20190420.jpg" alt="Project 2" className="project-card__img" />
+                <img src="/portfolio/paella_20190420.jpg" alt="Project 2" className="project-card__img" />
                 <div className="project-card__overlay">
                   <a href="#" className="project-card__link">
                     <i className="fas fa-external-link-alt"></i>
@@ -291,7 +291,7 @@ export default function Home() {
 
             <div className="project-card">
               <div className="project-card__image">
-                <img src="/paella_20190420.jpg" alt="Project 3" className="project-card__img" />
+                <img src="/portfolio/paella_20190420.jpg" alt="Project 3" className="project-card__img" />
                 <div className="project-card__overlay">
                   <a href="#" className="project-card__link">
                     <i className="fas fa-external-link-alt"></i>
