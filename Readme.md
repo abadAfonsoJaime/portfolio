@@ -113,7 +113,7 @@ npm run build
 # - Validates all links and routes
 
 # Preview production build locally
-np**Responsive design** - Mobile-first approach with breakpoints at 768px and 930px
+**Responsive design** - Mobile-first approach with breakpoints at 768px and 930px
 ✅ **Animated typing effect** - Hero subtitle cycles through roles using Typed.js
 ✅ **Hamburger navigation** - Mobile menu with smooth slide-in animation
 ✅ **BEM CSS architecture** - Maintainable, scalable stylesheet organization
