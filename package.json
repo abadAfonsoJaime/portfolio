@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@supabase/supabase-js": "^2.104.1",
     "next": "^16.1.3",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"

@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import emailjs from '@emailjs/browser'
+import { trackCVDownload, trackSocialClick, trackContactSubmit } from '../lib/analytics'
+import { trackContactSubmission, trackInteraction } from '../lib/supabase'
 
 export default function Home() {
   const [navOpen, setNavOpen] = useState(false)
@@ -50,14 +52,14 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     // EmailJS configuration
     // Replace these with your EmailJS credentials from emailjs.com
 
     const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!
     const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-        
+
     try {
       const templateParams = {
         from_name: formData.name,
@@ -65,9 +67,13 @@ export default function Home() {
         message: formData.message,
         to_name: 'Jaime Abad',
       }
-      
+
       await emailjs.send(serviceId, templateId, templateParams, publicKey)
-      
+
+      // Track successful submission
+      await trackContactSubmission(formData)
+      trackContactSubmit() // GA4 event
+
       alert('Thank you for your message! I will get back to you soon.')
       setFormData({ name: '', email: '', message: '' })
     } catch (error) {
@@ -135,17 +141,25 @@ export default function Home() {
             </p>
 
             <div className="button-group">
-              <a 
-                href="/portfolio/JaimeAbad_CV_2026.pdf" 
+              <a
+                href="/portfolio/JaimeAbad_CV_2026.pdf"
                 download="JaimeAbad_CV_2026.pdf"
                 className="button-group__btn button-group__btn--active"
+                onClick={() => {
+                  trackCVDownload('pdf')
+                  trackInteraction('cv_download', 'pdf')
+                }}
               >
                 <i className="fas fa-file-pdf"></i> CV (PDF)
               </a>
-              <a 
-                href="/portfolio/JaimeAbad_CV_2026.docx" 
+              <a
+                href="/portfolio/JaimeAbad_CV_2026.docx"
                 download="JaimeAbad_CV_2026.docx"
                 className="button-group__btn"
+                onClick={() => {
+                  trackCVDownload('docx')
+                  trackInteraction('cv_download', 'docx')
+                }}
               >
                 <i className="fas fa-file-word"></i> CV (DOCX)
               </a>
@@ -155,13 +169,38 @@ export default function Home() {
             </div>
 
             <div className="social-icons">
-              <a href="https://www.linkedin.com/in/jaime-abad" target="_blank" rel="noopener noreferrer" className="social-icons__link">
+              <a
+                href="https://www.linkedin.com/in/jaime-abad"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icons__link"
+                onClick={() => {
+                  trackSocialClick('linkedin')
+                  trackInteraction('social_click', 'linkedin')
+                }}
+              >
                 <i className="fab fa-linkedin-in"></i>
               </a>
-              <a href="https://github.com/abadAfonsoJaime" target="_blank" rel="noopener noreferrer" className="social-icons__link">
+              <a
+                href="https://github.com/abadAfonsoJaime"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-icons__link"
+                onClick={() => {
+                  trackSocialClick('github')
+                  trackInteraction('social_click', 'github')
+                }}
+              >
                 <i className="fab fa-github"></i>
               </a>
-              <a href="mailto:jaime.abad.work@gmail.com" className="social-icons__link">
+              <a
+                href="mailto:jaime.abad.work@gmail.com"
+                className="social-icons__link"
+                onClick={() => {
+                  trackSocialClick('email')
+                  trackInteraction('social_click', 'email')
+                }}
+              >
                 <i className="fas fa-envelope"></i>
               </a>
             </div>
