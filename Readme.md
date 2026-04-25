@@ -15,14 +15,10 @@ Professional responsive portfolio built with Next.js static site generation (SSG
 │   ├── JaimeAbad_CV_2026.pdf
 │   └── JaimeAbad_CV_2026.docx
 ├── docs/             # Documentation and implementation references
-│   ├── BEM_CONVERSION_GUIDE.md
-│   ├── COLOR_PALETTE.md
+│   ├── Style_Reference.md
 │   ├── EMAILJS_SETUP.md
 │   ├── GITHUB_ACTIONS_SETUP.md
-│   ├── IMPLEMENTATION_GUIDE.md
-│   ├── MIGRATION_COMPLETE.md
-│   ├── PERSONALIZATION_COMPLETE.md
-│   └── SECTIONS_GUIDE.md
+│   └── IMPLEMENTATION_GUIDE.md
 ├── out/              # Static export output (after build)
 ├── .github/
 │   └── copilot-instructions.md  # AI agent guidance
@@ -50,42 +46,14 @@ Professional responsive portfolio built with Next.js static site generation (SSG
 - **Maintainable**: Clear separation of UI, styles, assets, and docs
 - **Documentation-first**: All implementation references are centralized in `docs/`
 
-## Migration Summary
-
-This portfolio has been successfully migrated from a legacy static site into a modern Next.js SSG project.
-
-### What was completed
-
-- Next.js 16 static site setup with `app/` router
-- Full BEM CSS refactor of legacy styles
-- Responsive hero, navigation, projects, blog, and contact sections
-- Client-side form state and EmailJS integration strategy
-- GitHub Pages deployment compatibility with `basePath`
-- Documentation reorganization into `docs/`
-- Personalization from CV data with real skills and projects
-
-### Key outcomes
-
-- `app/page.tsx` now contains a single-page portfolio UI built with React state
-- `app/globals.css` follows BEM naming for all sections and modifiers
-- `next.config.js` supports static export and GitHub Pages asset paths
-- `public/` stores the hero image and CV download files
-- `docs/` contains implementation and best-practice references
-
-For the full migration detail, see `docs/MIGRATION_COMPLETE.md`.
-
 ## Documentation Organization
 
 This repository now has a dedicated documentation folder for markdown references.
 
-- `docs/BEM_CONVERSION_GUIDE.md` — BEM class mapping and conversion examples
-- `docs/COLOR_PALETTE.md` — Theme colors, variables, and accessibility guidance
-- `docs/EMAILJS_SETUP.md` — EmailJS form deployment configuration
-- `docs/GITHUB_ACTIONS_SETUP.md` — GitHub Pages CI/CD workflow
-- `docs/IMPLEMENTATION_GUIDE.md` — Best practices, SDLC, testing, and implementation criteria
-- `docs/MIGRATION_COMPLETE.md` — Migration summary archive
-- `docs/PERSONALIZATION_COMPLETE.md` — Personalization and CV content record
-- `docs/SECTIONS_GUIDE.md` — Section layout and navigation reference
+- [docs/STYLE_REFRENCE.md](docs/STYLE_REFRENCE.md) — BEM methodology, color palette, and sections implementation
+- [docs/EMAILJS_SETUP.md](docs/EMAILJS_SETUP.md) — EmailJS form deployment configuration
+- [docs/GITHUB_ACTIONS_SETUP.md](docs/GITHUB_ACTIONS_SETUP.md) — GitHub Pages CI/CD workflow
+- [docs/IMPLEMENTATION_GUIDE.md](docs/IMPLEMENTATION_GUIDE.md) — Best practices, SDLC, testing, and implementation criteria
 
 ## Configuration
 
