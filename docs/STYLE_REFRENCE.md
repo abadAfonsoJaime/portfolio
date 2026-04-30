@@ -1,10 +1,7 @@
-# Style Reference
+# Guide with Style Reference for BEM methodology
 
 Complete technical implementation details for CSS layout, BEM methodology, and color system.
 
-## BEM_GUIDE
-
-Complete mapping from old PascalCase classes to new BEM methodology.
 
 ### Navigation
 
