@@ -216,7 +216,7 @@ BEM works great with responsive design:
 .button--rounded { }
 ```
 
-### Converting Your Old Code
+### Converting Bad Code
 
 When you see this pattern in old code:
 ```html

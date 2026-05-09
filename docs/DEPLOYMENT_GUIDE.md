@@ -15,7 +15,7 @@ Step-by-step instructions for deploying the portfolio site to GitHub Pages with 
 ### Local Development Setup
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/portfolio.git
+git clone https://github.com/abadAfonsoJaime/portfolio.git
 cd portfolio
 
 # Install dependencies
