@@ -22,7 +22,7 @@ cd portfolio
 npm install
 
 # Copy environment template
-cp .env.example .env.local
+cp .env.local.example .env.local
 ```
 
 ## 🔧 Environment Configuration
@@ -37,17 +37,15 @@ NEXT_PUBLIC_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
 # Supabase Configuration
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
-
-# Contentful Configuration
-NEXT_PUBLIC_CONTENTFUL_SPACE_ID=your-space-id
-NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN=your-access-token
-CONTENTFUL_PREVIEW_ACCESS_TOKEN=your-preview-token
 
 # EmailJS Configuration
 NEXT_PUBLIC_EMAILJS_SERVICE_ID=your-service-id
 NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your-template-id
 NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your-public-key
+
+# Contentful Configuration (optional)
+NEXT_PUBLIC_CONTENTFUL_SPACE_ID=your-space-id
+NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN=your-access-token
 ```
 
 ### Obtaining API Keys
@@ -204,47 +202,69 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
-    - name: Install dependencies
-      run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
-    - name: Build
-      run: npm run build
-      env:
-        NEXT_PUBLIC_GA4_MEASUREMENT_ID: ${{ secrets.NEXT_PUBLIC_GA4_MEASUREMENT_ID }}
-        NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-        NEXT_PUBLIC_CONTENTFUL_SPACE_ID: ${{ secrets.NEXT_PUBLIC_CONTENTFUL_SPACE_ID }}
-        NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN: ${{ secrets.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN }}
-        NEXT_PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_SERVICE_ID }}
-        NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID }}
-        NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}
+      - name: Create .env.local with secrets
+        run: |
+          cat > .env.local <<'EOF'
+NEXT_PUBLIC_GA4_MEASUREMENT_ID=${{ secrets.NEXT_PUBLIC_GA4_MEASUREMENT_ID }}
+NEXT_PUBLIC_SUPABASE_URL=${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+NEXT_PUBLIC_CONTENTFUL_SPACE_ID=${{ secrets.NEXT_PUBLIC_CONTENTFUL_SPACE_ID }}
+NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN=${{ secrets.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN }}
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=${{ secrets.NEXT_PUBLIC_EMAILJS_SERVICE_ID }}
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=${{ secrets.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID }}
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=${{ secrets.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}
+EOF
 
-    - name: Deploy to GitHub Pages
-      if: github.ref == 'refs/heads/main'
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./out
-        cname: your-custom-domain.com  # Optional
-```
+      - name: Validate repository secrets
+        run: npm test
+
+      - name: Build Next.js
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
 ### Environment Secrets Setup
 **Repository Settings → Secrets and variables → Actions**

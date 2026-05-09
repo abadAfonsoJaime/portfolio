@@ -84,15 +84,22 @@ After successful deployment:
 The workflow:
 - Runs on Node.js 20
 - Uses npm ci for clean install
-- Injects secrets as environment variables during build
+- Creates `.env.local` from GitHub repository secrets
+- Runs `npm test` to validate secret configuration and Supabase connectivity
+- Builds the Next.js static site
 - Uploads static export to GitHub Pages
 - Deploys automatically
 
 ## Environment Variables in Build
 
-During the build process, GitHub Actions creates `.env.local`:
+During the build process, GitHub Actions creates `.env.local` with these values:
 
 ```bash
+NEXT_PUBLIC_GA4_MEASUREMENT_ID=[from GitHub secret]
+NEXT_PUBLIC_SUPABASE_URL=[from GitHub secret]
+NEXT_PUBLIC_SUPABASE_ANON_KEY=[from GitHub secret]
+NEXT_PUBLIC_CONTENTFUL_SPACE_ID=[from GitHub secret]
+NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN=[from GitHub secret]
 NEXT_PUBLIC_EMAILJS_SERVICE_ID=[from GitHub secret]
 NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=[from GitHub secret]
 NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=[from GitHub secret]
@@ -104,8 +111,8 @@ These variables are available to Next.js during build and bundled into the stati
 
 ### Build Fails
 - Check **Actions** tab for error logs
-- Verify all three secrets are added correctly
-- Ensure secret names match exactly: `EMAILJS_SERVICE_ID`, `EMAILJS_TEMPLATE_ID`, `EMAILJS_PUBLIC_KEY`
+- Verify all required secrets are added correctly
+- Ensure secret names match exactly: `NEXT_PUBLIC_GA4_MEASUREMENT_ID`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_CONTENTFUL_SPACE_ID`, `NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN`, `NEXT_PUBLIC_EMAILJS_SERVICE_ID`, `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`, `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
 
 ### Contact Form Not Working
 - Verify EmailJS credentials are correct
