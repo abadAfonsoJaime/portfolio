@@ -111,9 +111,20 @@ npm run dev
 npm run build
 ```
 
+### Local validation
+
 ```bash
 npm run test
 ```
+
+### CI Validation
+
+The GitHub Actions workflow now:
+- creates `.env.local` from repo secrets
+- validates GA4, Supabase, and EmailJS configuration before build
+- builds the static site
+- deploys to GitHub Pages
+- runs a post-deploy validation job using repo secrets again
 
 ### Preview Production Build
 

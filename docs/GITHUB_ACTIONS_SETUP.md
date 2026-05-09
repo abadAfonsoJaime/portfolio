@@ -9,28 +9,36 @@ This guide explains how to deploy your Next.js portfolio to GitHub Pages using G
 3. GitHub Pages enabled in repository settings
 
 ## Step 1: Configure EmailJS
-Follow the instructions in `EMAILJS_SETUP.md` to get your credentials:
-- `EMAILJS_SERVICE_ID`
-- `EMAILJS_TEMPLATE_ID`
-- `EMAILJS_PUBLIC_KEY`
+Follow the instructions in `EMAILJS_SETUP.md` to get your credentials, then expose them as repository secrets with the same browser-facing variable names used by the site:
+- `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
+- `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
+- `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
 
 ## Step 2: Add GitHub Secrets
 
 1. Go to your GitHub repository
 2. Navigate to **Settings** → **Secrets and variables** → **Actions**
-3. Click **New repository secret** and add three secrets:
+3. Click **New repository secret** and add these secrets:
 
-### Secret 1: EMAILJS_SERVICE_ID
-- Name: `EMAILJS_SERVICE_ID`
+### Secret 1: NEXT_PUBLIC_EMAILJS_SERVICE_ID
+- Name: `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
 - Value: Your EmailJS service ID (e.g., `service_abc123`)
 
-### Secret 2: EMAILJS_TEMPLATE_ID
-- Name: `EMAILJS_TEMPLATE_ID`
+### Secret 2: NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+- Name: `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
 - Value: Your EmailJS template ID (e.g., `template_xyz789`)
 
-### Secret 3: EMAILJS_PUBLIC_KEY
-- Name: `EMAILJS_PUBLIC_KEY`
+### Secret 3: NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+- Name: `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
 - Value: Your EmailJS public key (e.g., `A1B2C3D4E5F6G7H8`)
+
+### Additional Build Secrets
+For full site build and deploy validation, add these repository secrets as well:
+- `NEXT_PUBLIC_GA4_MEASUREMENT_ID`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_CONTENTFUL_SPACE_ID`
+- `NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN`
 
 ## Step 3: Enable GitHub Pages
 
@@ -85,10 +93,11 @@ The workflow:
 - Runs on Node.js 20
 - Uses npm ci for clean install
 - Creates `.env.local` from GitHub repository secrets
-- Runs `npm test` to validate secret configuration and Supabase connectivity
+- Runs `npm test` to validate GA4, Supabase, and EmailJS configuration before build
 - Builds the Next.js static site
 - Uploads static export to GitHub Pages
 - Deploys automatically
+- Runs a separate post-deploy validation job to verify the same repository secret values after deployment
 
 ## Environment Variables in Build
 
