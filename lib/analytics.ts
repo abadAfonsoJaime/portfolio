@@ -5,7 +5,7 @@ declare global {
   }
 }
 
-export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX';
+export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-XXXXXXXXXX';
 
 export const pageview = (url: string) => {
   if (typeof window !== 'undefined' && window.gtag) {

@@ -37,6 +37,31 @@ Professional responsive portfolio built with Next.js static site generation (SSG
   - Font Awesome 6.0 (icons)
   - Typed.js 2.0.10 (hero typing animation)
 
+## Integrations
+
+### Google Analytics 4
+- **Configuration**: Environment variable `NEXT_PUBLIC_GA4_MEASUREMENT_ID`
+- **Tracking**: Page views, custom events, user interactions
+- **Privacy**: GDPR-compliant with user consent management
+- **Dashboard**: Real-time analytics and conversion tracking
+
+### Supabase
+- **Purpose**: Visitor analytics, contact form submissions, data storage
+- **Setup**: SSR-compatible client with middleware for session management
+- **Database**: PostgreSQL with real-time capabilities
+- **Security**: Row Level Security (RLS) and API key management
+
+### Contentful CMS (Planned)
+- **Content Management**: Projects, blog posts, and dynamic content
+- **API**: REST API with CDN caching
+- **Integration**: Static site generation with content updates
+- **Workflow**: Editorial workflow with content scheduling
+
+### EmailJS
+- **Contact Forms**: Client-side email sending without backend
+- **Configuration**: Service ID, template ID, and public key
+- **Security**: Public key exposure acceptable for client-side operations
+
 ## Why This Approach
 
 - **Linux-friendly**: No runtime server required
@@ -86,11 +111,43 @@ npm run dev
 npm run build
 ```
 
+```bash
+npm run test
+```
+
 ### Preview Production Build
 
 ```bash
 npx serve out
 ```
+
+## Service Capabilities
+
+With the current integrations (Google Analytics 4, Supabase, EmailJS, and planned Contentful), you can achieve:
+
+### Analytics & Tracking
+- **User Behavior Analysis**: Track page views, user journeys, and engagement metrics
+- **Conversion Tracking**: Monitor CV downloads, contact form submissions, and project clicks
+- **Real-time Insights**: Live user activity and traffic analysis
+- **GDPR Compliance**: Consent-based tracking with data retention policies
+
+### Data Management
+- **Visitor Analytics**: Store session data, user interactions, and demographic information
+- **Contact Form Handling**: Secure storage of form submissions with backup
+- **Content Management**: Dynamic project portfolios and blog posts via CMS
+- **Real-time Updates**: Live content updates without redeployment
+
+### User Interaction
+- **Contact Forms**: Professional contact handling with email notifications
+- **File Downloads**: Trackable CV downloads with analytics
+- **Social Integration**: LinkedIn, GitHub, and other professional profiles
+- **Interactive Elements**: Animated hero sections and responsive navigation
+
+### Business Intelligence
+- **Performance Metrics**: Site performance, user engagement, and conversion rates
+- **Content Analytics**: Popular projects, blog post engagement, and user preferences
+- **Lead Generation**: Contact form submissions with follow-up capabilities
+- **SEO Optimization**: Content optimization based on analytics data
 
 ## Implementation Guide
 

@@ -68,6 +68,12 @@ This manual covers maintenance, deployment, monitoring, and operational procedur
    - Review meta descriptions
    - Update sitemap if needed
 
+### Development Tools Setup
+1. **Agent Skills Installation (Optional)**
+   - Install Supabase Agent Skills for enhanced AI coding assistance
+   - Run: `npx skills add supabase/agent-skills`
+   - This provides ready-made instructions and resources for working with Supabase
+
 ## 🚀 Deployment Procedures
 
 ### Automated Deployment (Recommended)
