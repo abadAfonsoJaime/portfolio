@@ -73,10 +73,10 @@ const tests = [
   },
   {
     name: 'Supabase Key',
-    envVar: 'NEXT_PUBLIC_SUPABASE_ANON_KEY',
+    envVar: 'NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY',
     test: (value) => {
       if (!value) {
-        throw new Error('Supabase anon key not configured. Use NEXT_PUBLIC_SUPABASE_ANON_KEY.');
+        throw new Error('Supabase publishable key not configured. Use NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY.');
       }
       if (!value.startsWith('sb_')) {
         throw new Error('Invalid Supabase key format');
