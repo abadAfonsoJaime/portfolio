@@ -316,6 +316,23 @@ Key references for implementation and deployment:
    ```
 2. Project appears on portfolio next build
 
+## Performance & Security
+
+- **Static Export** — Pre-rendered content with no server overhead
+- **CDN-Ready** — All assets are static and cacheable
+- **Secrets Management** — API keys stored in GitHub Secrets, never committed
+- **Analytics Privacy** — GDPR-compliant tracking with consent
+- **Type Safety** — TypeScript prevents runtime errors
+
+## Future Enhancements
+
+- Dark mode toggle with CSS custom properties
+- Blog post search and filtering
+- Project category filtering
+- Newsletter subscription integration
+- Advanced analytics dashboards
+
+
 ## Troubleshooting
 
 ### Build fails with missing modules
@@ -344,22 +361,6 @@ npm run build
 - Test with `npm run test`
 - Check browser console for errors
 
-## Performance & Security
-
-- **Static Export** — Pre-rendered content with no server overhead
-- **CDN-Ready** — All assets are static and cacheable
-- **Secrets Management** — API keys stored in GitHub Secrets, never committed
-- **Analytics Privacy** — GDPR-compliant tracking with consent
-- **Type Safety** — TypeScript prevents runtime errors
-
-## Future Enhancements
-
-- Dark mode toggle with CSS custom properties
-- Blog post search and filtering
-- Project category filtering
-- Newsletter subscription integration
-- Advanced analytics dashboards
-
 ## License
 
 ISC
@@ -383,18 +384,19 @@ Jaime Abad — 2026
 
 ### Implementation Paths
 
-#### Contact form options
-
-1. **Web3Forms** — Fastest no-backend option
-2. **Formspree** — Email forwarding without server code
-3. **EmailJS** — Client-side email service with a public key
-4. **Serverless API** — Custom backend route if deeper control is required
-
-#### CV download options
-
 1. **Static PDF / DOCX** in `public/`
 2. **External cloud link** (Drive/Dropbox)
 3. **Event-tracked download** with analytics
+
+The current implementation includes multiple CV formats, EmailJS integration guidance, and a GitHub Actions deployment workflow. Reference service-specific setup only after the core static site and CI/CD testing criteria are satisfied.
+
+### Static CV download
+
+```html
+<a href="/JaimeAbad_CV_2026.pdf" download="JaimeAbad_CV_2026.pdf" class="button-group__btn button-group__btn--active">
+  Download CV
+</a>
+```
 
 ### Annex References
 
@@ -402,19 +404,6 @@ Jaime Abad — 2026
 - `docs/EMAILJS_SETUP.md` — EmailJS client integration and credential setup
 - `docs/GITHUB_ACTIONS_SETUP.md` — GitHub Actions deployment workflow for GitHub Pages
 
-### Notes on Existing Implementation
-
-The current implementation includes multiple CV formats, EmailJS integration guidance, and a GitHub Actions deployment workflow. Reference service-specific setup only after the core static site and CI/CD testing criteria are satisfied.
-
-### Appendix: Common Implementation Patterns
-
-#### Static CV download
-
-```html
-<a href="/JaimeAbad_CV_2026.pdf" download="JaimeAbad_CV_2026.pdf" class="button-group__btn button-group__btn--active">
-  Download CV
-</a>
-```
 
 #### Static site build check
 
