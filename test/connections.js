@@ -6,7 +6,40 @@
  * Run with: node test/connections.js
  */
 
+const fs = require('fs');
 const https = require('https');
+
+function loadEnvFile() {
+  try {
+    require('dotenv').config({ path: '.env.local' });
+  } catch (error) {
+    if (!fs.existsSync('.env.local')) {
+      return;
+    }
+
+    const content = fs.readFileSync('.env.local', 'utf8');
+    content.split(/\r?\n/).forEach((line) => {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) {
+        return;
+      }
+
+      const [rawKey, ...rawValue] = trimmed.split('=');
+      const key = rawKey.trim();
+      let value = rawValue.join('=').trim();
+
+      if (value.startsWith('"') && value.endsWith('"')) {
+        value = value.slice(1, -1);
+      }
+
+      if (!(key in process.env)) {
+        process.env[key] = value;
+      }
+    });
+  }
+}
+
+loadEnvFile();
 
 // Test configuration
 const tests = [

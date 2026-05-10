@@ -9,10 +9,7 @@ This guide explains how to deploy your Next.js portfolio to GitHub Pages using G
 3. GitHub Pages enabled in repository settings
 
 ## Step 1: Configure EmailJS
-Follow the instructions in `EMAILJS_SETUP.md` to get your credentials, then expose them as repository secrets with the same browser-facing variable names used by the site:
-- `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
-- `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
-- `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
+Follow the instructions in `EMAILJS_SETUP.md` to get your credentials, then expose them as repository secrets using the repo secret names below.
 
 ## Step 2: Add GitHub Secrets
 
@@ -20,23 +17,23 @@ Follow the instructions in `EMAILJS_SETUP.md` to get your credentials, then expo
 2. Navigate to **Settings** → **Secrets and variables** → **Actions**
 3. Click **New repository secret** and add these secrets:
 
-### Secret 1: NEXT_PUBLIC_EMAILJS_SERVICE_ID
-- Name: `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
+### Secret 1: EMAILJS_SERVICE_ID
+- Name: `EMAILJS_SERVICE_ID`
 - Value: Your EmailJS service ID (e.g., `service_abc123`)
 
-### Secret 2: NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
-- Name: `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
+### Secret 2: EMAILJS_TEMPLATE_ID
+- Name: `EMAILJS_TEMPLATE_ID`
 - Value: Your EmailJS template ID (e.g., `template_xyz789`)
 
-### Secret 3: NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-- Name: `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
+### Secret 3: EMAILJS_PUBLIC_KEY
+- Name: `EMAILJS_PUBLIC_KEY`
 - Value: Your EmailJS public key (e.g., `A1B2C3D4E5F6G7H8`)
 
 ### Additional Build Secrets
 For full site build and deploy validation, add these repository secrets as well:
-- `NEXT_PUBLIC_GA4_MEASUREMENT_ID`
+- `GA4_MEASUREMENT_ID`
 - `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 - `NEXT_PUBLIC_CONTENTFUL_SPACE_ID`
 - `NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN`
 
@@ -101,17 +98,18 @@ The workflow:
 
 ## Environment Variables in Build
 
-During the build process, GitHub Actions creates `.env.local` with these values:
+During the build process, GitHub Actions creates `.env.local` from repository secret names and writes these runtime variables:
 
 ```bash
-NEXT_PUBLIC_GA4_MEASUREMENT_ID=[from GitHub secret]
-NEXT_PUBLIC_SUPABASE_URL=[from GitHub secret]
-NEXT_PUBLIC_SUPABASE_ANON_KEY=[from GitHub secret]
+NEXT_PUBLIC_GA4_MEASUREMENT_ID=[from secret GA4_MEASUREMENT_ID]
+NEXT_PUBLIC_SUPABASE_URL=[from secret NEXT_PUBLIC_SUPABASE_URL]
+NEXT_PUBLIC_SUPABASE_ANON_KEY=[from secret NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY]
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=[from secret NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY]
 NEXT_PUBLIC_CONTENTFUL_SPACE_ID=[from GitHub secret]
 NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN=[from GitHub secret]
-NEXT_PUBLIC_EMAILJS_SERVICE_ID=[from GitHub secret]
-NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=[from GitHub secret]
-NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=[from GitHub secret]
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=[from secret EMAILJS_SERVICE_ID]
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=[from secret EMAILJS_TEMPLATE_ID]
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=[from secret EMAILJS_PUBLIC_KEY]
 ```
 
 These variables are available to Next.js during build and bundled into the static output.
@@ -121,8 +119,7 @@ These variables are available to Next.js during build and bundled into the stati
 ### Build Fails
 - Check **Actions** tab for error logs
 - Verify all required secrets are added correctly
-- Ensure secret names match exactly: `NEXT_PUBLIC_GA4_MEASUREMENT_ID`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `NEXT_PUBLIC_CONTENTFUL_SPACE_ID`, `NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN`, `NEXT_PUBLIC_EMAILJS_SERVICE_ID`, `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`, `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
-
+- Ensure repository secret names match exactly: `GA4_MEASUREMENT_ID`, `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `EMAILJS_SERVICE_ID`, `EMAILJS_TEMPLATE_ID`, `EMAILJS_PUBLIC_KEY`
 ### Contact Form Not Working
 - Verify EmailJS credentials are correct
 - Check browser console for errors
