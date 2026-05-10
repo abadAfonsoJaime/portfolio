@@ -1,37 +1,69 @@
 # Portfolio Site - Jaime Abad
 
-Professional responsive portfolio built with Next.js static site generation (SSG), React 19, TypeScript, and BEM CSS methodology. Designed for zero-runtime deployment with optimized performance, SEO, and GitHub Pages compatibility.
+Professional responsive portfolio built with Next.js 16 static site generation (SSG), React 19, TypeScript, and BEM CSS methodology. Features AI-powered content management through Contentful CMS, visitor analytics with Supabase, and integrated contact forms with EmailJS. Designed for zero-runtime deployment with optimized performance, SEO, and GitHub Pages compatibility.
+
+## Features
+
+- ✅ **Static Site Generation** — Next.js with zero-runtime deployment
+- ✅ **Headless CMS** — Contentful integration for blog posts and projects
+- ✅ **AI-Powered Management** — Agents can manage both code and content
+- ✅ **Analytics** — Google Analytics 4 and Supabase visitor tracking
+- ✅ **Contact Forms** — EmailJS integration for secure form submissions
+- ✅ **Responsive Design** — Mobile-first BEM CSS methodology
+- ✅ **CI/CD Pipeline** — GitHub Actions with automated validation
+- ✅ **TypeScript** — Type-safe development with strict mode
 
 ## Project Structure
 
 ```
 /portfolio
 ├── app/
-│   ├── layout.tsx    # Root layout with metadata & Font Awesome CDN
-│   ├── page.tsx      # Home page - client component with React state
-│   └── globals.css   # BEM methodology styles (all sections)
-├── public/           # Static assets (images, CV, etc.)
+│   ├── layout.tsx              # Root layout with metadata & CDN scripts
+│   ├── page.tsx                # Home page - client component with state
+│   └── globals.css             # BEM CSS methodology (all sections)
+├── lib/
+│   ├── contentful.ts           # Content Delivery API (read)
+│   ├── contentful-management.ts    # Management API client (write)
+│   ├── contentful-blog-management.ts    # Blog post CRUD
+│   ├── contentful-projects-management.ts # Project CRUD
+│   ├── supabase.ts             # Supabase client & analytics
+│   ├── analytics.ts            # GA4 tracking functions
+│   └── emailjs.ts              # EmailJS form handler
+├── scripts/
+│   └── contentful-cli.ts       # CLI for agent-driven content management
+├── public/
 │   ├── paella_20190420.jpg
 │   ├── JaimeAbad_CV_2026.pdf
 │   └── JaimeAbad_CV_2026.docx
-├── docs/             # Documentation and implementation references
-│   ├── STYLE_REFRENCE.md
-│   ├── EMAILJS_SETUP.md
-│   └── GITHUB_ACTIONS_SETUP.md
-├── out/              # Static export output (after build)
+├── test/
+│   └── connections.js          # Pre-deployment validation
+├── docs/
+│   ├── DEPLOYMENT_GUIDE.md         # Complete deployment walkthrough
+│   ├── CONTENTFUL_INTEGRATION.md   # CMS setup and content models
+│   ├── CONTENTFUL_MANAGEMENT_API.md # Agent CLI reference
+│   ├── AGENT_QUICK_REFERENCE.md    # One-page agent cheatsheet
+│   ├── GITHUB_ACTIONS_SETUP.md     # CI/CD configuration
+│   ├── EMAILJS_SETUP.md            # Contact form integration
+│   ├── STYLE_REFRENCE.md           # BEM CSS and design system
+│   ├── MAINTENANCE_OPERATIONS.md   # Operational procedures
+│   └── SCALABILITY_GUIDE.md        # Performance optimization
 ├── .github/
-│   └── copilot-instructions.md  # AI agent guidance
-├── next.config.js    # Static export configuration
-├── package.json      # Dependencies and scripts
-├── tsconfig.json     # TypeScript configuration
-└── Readme.md         # This file
+│   ├── copilot-instructions.md     # Agent task guidance
+│   ├── AGENT_INSTRUCTIONS.md       # Agent capabilities overview
+│   └── workflows/
+│       ├── deploy.yml              # Main CI/CD pipeline
+│       └── contentful-sync.yml     # Content management workflow
+├── next.config.js              # Static export configuration
+├── package.json                # Dependencies and scripts
+├── tsconfig.json               # TypeScript configuration
+└── Readme.md                   # This file
 ```
 
 ## Tech Stack
 
 - **Next.js 16**: App Router with static export (`output: 'export'`)
-- **React 19**: Client components for interactivity
-- **TypeScript**: Type-safe development with strict mode enabled
+- **React 19**: Client components for interactivity  
+- **TypeScript**: Type-safe development with strict mode
 - **BEM CSS**: Block Element Modifier methodology for maintainable styles
 - **CDN Libraries**:
   - Font Awesome 6.0 (icons)
@@ -40,264 +72,302 @@ Professional responsive portfolio built with Next.js static site generation (SSG
 ## Integrations
 
 ### Google Analytics 4
-- **Configuration**: Environment variable `NEXT_PUBLIC_GA4_MEASUREMENT_ID`
-- **Tracking**: Page views, custom events, user interactions
-- **Privacy**: GDPR-compliant with user consent management
-- **Dashboard**: Real-time analytics and conversion tracking
+- Real-time tracking of page views and user interactions
+- GDPR-compliant consent management
+- Dashboard: https://analytics.google.com
+- **Environment Variable**: `NEXT_PUBLIC_GA4_MEASUREMENT_ID`
 
-### Supabase
-- **Purpose**: Visitor analytics, contact form submissions, data storage
-- **Setup**: SSR-compatible client with middleware for session management
-- **Database**: PostgreSQL with real-time capabilities
-- **Security**: Row Level Security (RLS) and API key management
+### Supabase (PostgreSQL)
+- Visitor session tracking and analytics
+- Contact form submission storage  
+- Real-time database capabilities
+- SSR-compatible client with middleware
+- **Environment Variables**: 
+  - `NEXT_PUBLIC_SUPABASE_URL`
+  - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 
-### Contentful CMS (Planned)
-- **Content Management**: Projects, blog posts, and dynamic content
-- **API**: REST API with CDN caching
-- **Integration**: Static site generation with content updates
-- **Workflow**: Editorial workflow with content scheduling
+### Contentful CMS (Headless)
+- Blog posts with metadata (title, slug, excerpt, content, category, tags, featured flag)
+- Project entries with details (title, slug, description, technologies, type, demo/GitHub links)
+- Content Delivery API (CDN-cached reads)
+- **Management API** with agent-driven CRUD operations
+- **Environment Variables**:
+  - `NEXT_PUBLIC_CONTENTFUL_SPACE_ID`
+  - `NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN`
+  - `CONTENTFUL_MANAGEMENT_TOKEN` (GitHub Secrets only)
 
 ### EmailJS
-- **Contact Forms**: Client-side email sending without backend
-- **Configuration**: Service ID, template ID, and public key
-- **Security**: Public key exposure acceptable for client-side operations
+- Client-side contact form handling
+- No backend server required
+- Secure template-based email delivery
+- **Environment Variables**:
+  - `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
+  - `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
+  - `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
 
-## Why This Approach
+## Getting Started
 
-- **Linux-friendly**: No runtime server required
-- **Static-ready**: Works on GitHub Pages, Netlify, S3, and any CDN
-- **SEO-friendly**: Pre-rendered static markup
-- **Maintainable**: Clear separation of UI, styles, assets, and docs
-- **Documentation-first**: All implementation references are centralized in `docs/`
-
-## Documentation Organization
-
-This repository now has a dedicated documentation folder for markdown references.
-
-- [docs/STYLE_REFRENCE.md](docs/STYLE_REFRENCE.md) — BEM methodology, color palette, and sections implementation
-- [docs/EMAILJS_SETUP.md](docs/EMAILJS_SETUP.md) — EmailJS form deployment configuration
-- [docs/GITHUB_ACTIONS_SETUP.md](docs/GITHUB_ACTIONS_SETUP.md) — GitHub Pages CI/CD workflow
-
-## Configuration
-
-```js
-// next.config.js
-const nextConfig = {
-  output: 'export',           // Generate static HTML/CSS/JS
-  basePath: '/portfolio',     // Required for GitHub Pages subdirectory
-  trailingSlash: true,        // Add trailing slashes to URLs
-  images: {
-    unoptimized: true,        // Required for static export
-  },
-}
-
-module.exports = nextConfig
-```
-
-> `basePath: '/portfolio'` is required for GitHub Pages deployment at `https://abadAfonsoJaime.github.io/portfolio/`. If you move to a custom domain or root URL, remove this setting.
-
-## Build & Deploy
+### Prerequisites
+- Node.js 20+ and npm
+- Git
+- (Optional) Accounts for Contentful, Supabase, Google Analytics 4, and EmailJS
 
 ### Local Development
 
 ```bash
+# Clone and install
+git clone https://github.com/abadAfonsoJaime/portfolio.git
+cd portfolio
 npm install
+
+# Copy environment template
+cp .env.local.example .env.local
+# Edit .env.local with your API keys
+
+# Start dev server (with hot reload)
 npm run dev
+# Open http://localhost:3000
 ```
 
 ### Production Build
 
 ```bash
+# Build static site (generates /out directory)
 npm run build
-```
 
-### Local validation
-
-```bash
+# Validate configuration before deployment
 npm run test
-```
 
-### CI Validation
-
-The GitHub Actions workflow now:
-- creates `.env.local` from repo secrets
-- validates GA4, Supabase, and EmailJS configuration before build
-- builds the static site
-- deploys to GitHub Pages
-- runs a post-deploy validation job using repo secrets again
-
-### Preview Production Build
-
-```bash
+# Preview production build locally
 npx serve out
 ```
 
-## Service Capabilities
+## AI Agent Integration
 
-With the current integrations (Google Analytics 4, Supabase, EmailJS, and planned Contentful), you can achieve:
+The portfolio now supports AI agents that can manage both code and content:
 
-### Analytics & Tracking
-- **User Behavior Analysis**: Track page views, user journeys, and engagement metrics
-- **Conversion Tracking**: Monitor CV downloads, contact form submissions, and project clicks
-- **Real-time Insights**: Live user activity and traffic analysis
-- **GDPR Compliance**: Consent-based tracking with data retention policies
+### Agent Capabilities
 
-### Data Management
-- **Visitor Analytics**: Store session data, user interactions, and demographic information
-- **Contact Form Handling**: Secure storage of form submissions with backup
-- **Content Management**: Dynamic project portfolios and blog posts via CMS
-- **Real-time Updates**: Live content updates without redeployment
+Agents can:
+- **Create/update blog posts** in Contentful
+- **Create/update projects** in Contentful
+- **List existing content** to prevent duplicates
+- **Modify code** to reference new content
+- **Execute unified workflows** (content + code in one task)
 
-### User Interaction
-- **Contact Forms**: Professional contact handling with email notifications
-- **File Downloads**: Trackable CV downloads with analytics
-- **Social Integration**: LinkedIn, GitHub, and other professional profiles
-- **Interactive Elements**: Animated hero sections and responsive navigation
+### Agent Commands
 
-### Business Intelligence
-- **Performance Metrics**: Site performance, user engagement, and conversion rates
-- **Content Analytics**: Popular projects, blog post engagement, and user preferences
-- **Lead Generation**: Contact form submissions with follow-up capabilities
-- **SEO Optimization**: Content optimization based on analytics data
+```bash
+# List and create blog posts
+npm run script -- contentful:list-blogs
+npm run script -- contentful:create-blog --title "Post" --slug "post-slug" --category "Engineering" --excerpt "Summary" --content "Markdown content"
+npm run script -- contentful:update-blog --id "entry-id" --title "Updated Title"
+
+# List and create projects
+npm run script -- contentful:list-projects
+npm run script -- contentful:create-project --title "Project" --slug "project-slug" --description "Overview" --technologies "React, TypeScript" --type "Open Source"
+npm run script -- contentful:update-project --id "entry-id" --title "Updated Title"
+```
+
+**Agent Documentation**: See [.github/copilot-instructions.md](.github/copilot-instructions.md) and [docs/AGENT_QUICK_REFERENCE.md](docs/AGENT_QUICK_REFERENCE.md)
+
+## Configuration
+
+### Next.js Configuration
+```js
+// next.config.js
+const nextConfig = {
+  output: 'export',           // Generate static HTML/CSS/JS
+  basePath: '/portfolio',     // GitHub Pages subdirectory
+  trailingSlash: true,        // Add trailing slashes
+  images: {
+    unoptimized: true,        // Required for static export
+  },
+}
+module.exports = nextConfig
+```
+
+> **Note**: `basePath: '/portfolio'` is required for GitHub Pages deployment at `https://abadAfonsoJaime.github.io/portfolio/`. Remove for custom domains or root URLs.
+
+### Environment Setup
+
+**Local Development** (`.env.local`):
+```bash
+NEXT_PUBLIC_GA4_MEASUREMENT_ID=G-XXXXXXXXXX
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-key
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=your-id
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your-id
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your-key
+NEXT_PUBLIC_CONTENTFUL_SPACE_ID=your-space-id
+NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN=your-token
+# CONTENTFUL_MANAGEMENT_TOKEN not needed locally
+```
+
+**GitHub Secrets** (for CI/CD):
+- `GA4_MEASUREMENT_ID`
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
+- `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
+- `EMAILJS_PUBLIC_KEY`
+- `NEXT_PUBLIC_CONTENTFUL_SPACE_ID`
+- `NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN`
+- `CONTENTFUL_MANAGEMENT_TOKEN` (for agent write operations)
+
+**Setup Guide**: See [docs/DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) for detailed API key retrieval instructions.
+
+## CI/CD Pipeline
+
+GitHub Actions workflow at `.github/workflows/deploy.yml`:
+
+1. **Build** — Compile Next.js with static export
+2. **Test** — Validate GA4, Supabase, EmailJS, and Contentful credentials
+3. **Deploy** — Upload static assets to GitHub Pages
+4. **Validate** — Post-deploy smoke tests
+
+**Manual Workflows**:
+- `.github/workflows/contentful-sync.yml` — Manual content management operations (list-blogs, list-projects, deploy)
+
+Trigger deployments via:
+```bash
+git push main  # Automatic
+# or GitHub UI > Actions > Run workflow
+```
 
 ## Implementation Guide
 
-This guide frames portfolio development through the lens of software development lifecycle (SDLC), best practices, implementation criteria, and CI/CD quality gates.
-
-### Purpose
-
-The implementation guide is not just a technical recipe. It is a reference for:
-
-- Architecture decisions
-- Quality criteria
-- Testing and deployment strategy
-- Documentation alignment
-- Design and implementation consistency
-
-### Core Principles
-
-#### 1. Maintainability
-
-- Use BEM for CSS class structure
+### Maintainability
+- Use BEM for CSS class structure (`.block__element--modifier`)
 - Keep UI and styles separated
-- Avoid inline styling for reusable components
-- Keep `app/page.tsx` readable and section-focused
+- Avoid inline styling
+- Keep components focused and readable
 
-#### 2. Consistency
+### Consistency
+- Follow color palette: `#007ced` (primary), `#222` (dark), `#e5e5e5` (light)
+- Use consistent spacing and typography
+- Maintain interaction patterns across sections
 
-- Follow the color palette defined in `docs/STYLE_REFRENCE.md`
-- Use the same spacing, typography, and interaction patterns
-- Keep repeated UI patterns consistent across sections
-
-#### 3. Simplicity
-
+### Simplicity
 - Prefer static assets in `public/`
-- Use simple download links for CV files
-- Avoid unnecessary JS or runtime dependencies
+- Use simple download links
+- Avoid unnecessary JavaScript dependencies
 
-#### 4. Testability
+### Testability
+- Ensure `npm run build` passes
+- Validate asset loading on deployed site
+- Test form submissions and analytics tracking
 
-- Ensure the build passes with `npm run build`
-- Validate GitHub Pages base path behavior
-- Confirm asset loading in production output
-- Preserve the contact form flow through smoke tests
+## Documentation
 
-### SDLC for Portfolio Enhancements
+Key references for implementation and deployment:
 
-#### Phase 1: Requirements
+| Document | Purpose |
+|----------|---------|
+| [DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) | Complete setup walkthrough for all integrations |
+| [CONTENTFUL_INTEGRATION.md](docs/CONTENTFUL_INTEGRATION.md) | CMS content models and API usage |
+| [CONTENTFUL_MANAGEMENT_API.md](docs/CONTENTFUL_MANAGEMENT_API.md) | Agent CLI reference and workflows |
+| [AGENT_QUICK_REFERENCE.md](docs/AGENT_QUICK_REFERENCE.md) | One-page cheatsheet for agents |
+| [GITHUB_ACTIONS_SETUP.md](docs/GITHUB_ACTIONS_SETUP.md) | CI/CD workflow configuration |
+| [STYLE_REFRENCE.md](docs/STYLE_REFRENCE.md) | BEM CSS and design system reference |
+| [EMAILJS_SETUP.md](docs/EMAILJS_SETUP.md) | Contact form integration details |
+| [MAINTENANCE_OPERATIONS.md](docs/MAINTENANCE_OPERATIONS.md) | Regular operational tasks |
+| [SCALABILITY_GUIDE.md](docs/SCALABILITY_GUIDE.md) | Performance optimization strategies |
 
-- Define the user journey for hero, about, projects, blog, and contact
-- Confirm which features are mandatory: CV downloads, contact form, responsive layout
-- Identify deployment constraints: GitHub Pages subdirectory, static export
+## Why This Architecture
 
-#### Phase 2: Design
+- **Linux-friendly** — No Node.js runtime required
+- **Static-ready** — Works on GitHub Pages, Netlify, S3, and any CDN
+- **SEO-optimized** — Pre-rendered static markup for search engines
+- **Maintainable** — Clear separation of concerns (UI, styles, assets, docs)
+- **Secure** — Sensitive tokens stored in GitHub Secrets only
+- **Agent-ready** — Structured for AI-powered content and code management
 
-- Map sections to BEM blocks and elements
-- Define the color palette and interactive styles
-- Ensure the layout works on desktop and mobile
-- Documented in `docs/STYLE_REFRENCE.md`
+## Development Workflow
 
-#### Phase 3: Development
+### Adding a New Section
+1. Create BEM classes in `app/globals.css` (`.section-name`, `.section-name__element`)
+2. Add React component to `app/page.tsx`
+3. Apply color palette from `docs/STYLE_REFRENCE.md`
+4. Test with `npm run build`
+5. Update docs if design changes
 
-- Implement UI in `app/page.tsx`
-- Implement styling in `app/globals.css`
-- Store static assets in `public/`
-- Keep documentation current in `docs/`
+### Adding Blog Posts
+1. Use the Contentful UI or CLI:
+   ```bash
+   npm run script -- contentful:create-blog \
+     --title "Your Post" \
+     --slug "your-post" \
+     --category "Engineering" \
+     --excerpt "Summary" \
+     --content "Markdown content"
+   ```
+2. Site auto-updates on next build
 
-#### Phase 4: Testing
+### Adding Projects
+1. Use Contentful UI or CLI:
+   ```bash
+   npm run script -- contentful:create-project \
+     --title "Project Name" \
+     --slug "project-slug" \
+     --description "Overview" \
+     --technologies "React,TypeScript" \
+     --type "Open Source"
+   ```
+2. Project appears on portfolio next build
 
-- Local build test: `npm run build`
-- Browser validation of built output
-- GitHub Pages deployed path checking
-- Download link validation on deployed site
-- Contact form behavior verification in staging or preview
+## Troubleshooting
 
-#### Phase 5: Deployment
+### Build fails with missing modules
+```bash
+npm install
+npm run build
+```
 
-- Run GitHub Actions workflow from `docs/GITHUB_ACTIONS_SETUP.md`
-- Use secrets securely in GitHub Actions
-- Avoid committing `.env.local`
+### Environment variables not loading
+- Ensure `.env.local` exists in project root
+- Check variable names match documentation
+- Restart `npm run dev` after editing `.env.local`
 
-#### Phase 6: Monitoring
+### GitHub Pages shows 404
+- Verify `basePath: '/portfolio'` in `next.config.js`
+- Clear browser cache
+- Check deployment in GitHub Pages settings
 
-- Review GitHub Actions logs
-- Validate the live site on deployment
-- Update documentation with any discovered issues
+### Contentful commands fail
+- Ensure `CONTENTFUL_MANAGEMENT_TOKEN` is in GitHub Secrets (not `.env.local`)
+- Run `npm install` to ensure `contentful-management` package is installed
+- Check token hasn't expired in Contentful dashboard
 
-### Implementation Criteria
+### Contact form not working
+- Verify EmailJS credentials in GitHub Secrets
+- Test with `npm run test`
+- Check browser console for errors
 
-#### Feature readiness
+## Performance & Security
 
-- The portfolio should be visually complete and responsive
-- All sections should render correctly in the static build
-- Navigation should work with anchor links and page reloads
-- Download links must be functional on deployed site
+- **Static Export** — Pre-rendered content with no server overhead
+- **CDN-Ready** — All assets are static and cacheable
+- **Secrets Management** — API keys stored in GitHub Secrets, never committed
+- **Analytics Privacy** — GDPR-compliant tracking with consent
+- **Type Safety** — TypeScript prevents runtime errors
 
-#### Quality gates
+## Future Enhancements
 
-- All markdown docs should be available from `docs/`
-- CSS should be loaded and animations should function in production
-- The `basePath` configuration must be correct for GitHub Pages
-- Accessibility and contrast should meet basic WCAG AA standards
+- Dark mode toggle with CSS custom properties
+- Blog post search and filtering
+- Project category filtering
+- Newsletter subscription integration
+- Advanced analytics dashboards
 
-#### Acceptance criteria
+## License
 
-- `npm run build` succeeds with no errors
-- Deployed site loads CSS and images correctly
-- Form submission uses a safe, documented integration path
-- CV file downloads work via the public asset links
+ISC
 
-### CI/CD Testing Strategy
+## Author
 
-The CI/CD pipeline should validate both generic static site behavior and feature-specific cases.
+Jaime Abad — 2026
 
-#### Static site tests
-
-- Build completion
-- Output generation in `out/`
-- No broken links or missing assets
-- Correct `basePath` behavior on GitHub Pages
-
-#### Feature tests
-
-- CV download links should be accessible in the static output
-- Hero, project, blog, and contact sections should display properly
-- Contact form route or service endpoint should be reachable
-- Social and external links should resolve correctly
-
-#### Deployment validation
-
-- Live site should be reachable at `https://abadAfonsoJaime.github.io/portfolio/`
-- Styles should apply after deployment
-- Image assets should be loaded under `/portfolio/`
-
-### Best Practices
-
-#### Documentation-first development
-
-- Keep notes and decision rationale in `docs/`
-- Use `docs/Style_Reference.md` for implementation guidance
-- Update docs whenever design or behavior changes
 
 #### GitHub Pages readiness
 

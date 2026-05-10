@@ -148,3 +148,30 @@ Migration Notes
 ```
 
 **Color variables**: Consider converting hex values to CSS custom properties for easier theming.
+
+## Contentful Management Commands
+
+Agents may use the new Contentful CLI for safe content operations.
+
+### Blog operations
+```bash
+npm run script -- contentful:list-blogs
+npm run script -- contentful:create-blog --title "Post Title" --slug "post-slug" --category "Engineering" --excerpt "Short summary" --content "Markdown content"
+npm run script -- contentful:update-blog --id "entry-id" --title "Updated Title"
+npm run script -- contentful:delete-blog --id "entry-id"
+```
+
+### Project operations
+```bash
+npm run script -- contentful:list-projects
+npm run script -- contentful:create-project --title "Project" --slug "project-slug" --description "Overview" --technologies "React, TypeScript" --type "Open Source"
+npm run script -- contentful:update-project --id "entry-id" --title "Updated Title"
+npm run script -- contentful:delete-project --id "entry-id"
+```
+
+### Workflow rules
+- Check existing items before creating new ones.
+- Use `CONTENTFUL_MANAGEMENT_TOKEN` only in CI or server contexts.
+- Keep slugs lowercase, hyphenated, and unique.
+- Use markdown for blog content.
+- If code changes are required, update files and commit them along with any content references.

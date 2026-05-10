@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "export": "next build",
-    "test": "node test/connections.js"
+    "test": "node test/connections.js",
+    "script": "tsx scripts/contentful-cli.ts"
   },
   "keywords": [
     "portfolio",
@@ -20,6 +21,7 @@
     "@emailjs/browser": "^4.4.1",
     "@supabase/ssr": "^0.10.3",
     "@supabase/supabase-js": "^2.104.1",
+    "contentful-management": "^12.3.3",
     "next": "^16.1.3",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
@@ -28,6 +30,7 @@
     "@types/node": "25.0.9",
     "@types/react": "19.2.8",
     "dotenv": "^17.4.2",
+    "tsx": "^4.21.0",
     "typescript": "5.9.3"
   }
 }
